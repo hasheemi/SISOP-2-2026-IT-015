@@ -125,6 +125,7 @@ void encryptDaemon() {
     if (f) {
       // fungsi secret
       write_log("secret", "running");
+      // get random kalimatnya bosss
       char* encoded = base64_encode(kalimatalay[rand() % 4]);
       fprintf(f, "%s\n", encoded);
       fclose(f);
@@ -150,6 +151,7 @@ void killDaemon() {
     return;
   }
   int pid;
+  // simpan pid ke
   fscanf(f, "%d", &pid);
   fclose(f);
 
@@ -173,6 +175,7 @@ void decrpytFile() {
   }
 
   char line[512];
+  // get line stau persatu
   while (fgets(line, sizeof(line), f)) {
     line[strcspn(line, "\n")] = 0;
     char* decoded = base64_decode(line);
@@ -201,7 +204,8 @@ int main(int argc, char* argv[]) {
     return 0;
   }
 
-  // handle daemon
+  // handle jika ada argument
+  //  handle daemon
   if (strcmp(argv[1], "-daemon") == 0) {
     encryptDaemon();
   } else if (strcmp(argv[1], "-decrypt") == 0) {
