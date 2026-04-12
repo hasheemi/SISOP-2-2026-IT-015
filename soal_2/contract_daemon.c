@@ -125,6 +125,14 @@ int main() {
         writeContract(0);  // created pertama kali
         isFirstCreate = 1;
       } else {
+        // revisi : tambah logging saat file terhapus
+        FILE* log = fopen(LOG_FILE, "a");
+      if (log) {
+        fprintf(log, "contract violated.\n");
+        fclose(log);
+      } else {
+        printf("[ERROR] log tidak ditemukan");
+      }
         sleep(rand() % 2 + 1);
         writeContract(1);  // restored
       }
