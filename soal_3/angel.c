@@ -111,6 +111,7 @@ void encryptDaemon() {
 
   umask(0);
   setsid();
+ write_log("surprise", "running");
 
   FILE* f = fopen(PID_FILE, "w");
   if (f) {
